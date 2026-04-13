@@ -2,7 +2,10 @@ import OpenAI from "openai";
 import { lookupRestaurantFaq, createReservationStub, handoffToHumanStub } from "./tools.js";
 import { isWithinBusinessHours } from "./bizHours.js";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  baseURL: process.env.OPENAI_BASE_URL,
+});
 
 function mustHaveEnv(name) {
 	if (!process.env[name]) throw new Error(`Missing ${name}`);
