@@ -52,5 +52,9 @@ app.post("/twilio/whatsapp", async (req, res) => {
 	}
 });
 
-const port = Number(process.env.PORT || 3000);
-app.listen(port, () => console.log(`Listening on :${port}`));
+if (process.env.NODE_ENV !== "production") {
+  const port = Number(process.env.PORT || 3000);
+  app.listen(port, () => console.log(`Listening on :${port}`));
+}
+
+export default app;
