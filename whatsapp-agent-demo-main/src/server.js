@@ -43,7 +43,7 @@ app.post("/twilio/whatsapp", async (req, res) => {
     		await setSession(from, { history: [], flow: null, reservationDraft: {}, branch: null });
     		await sendWelcome({ to: from });
     		return res.status(200).send("ok");
-}
+		}
 		
 		// First-time user — send welcome with buttons
 		const isFirstMessage = session.history.length === 0 && !session.flow;
