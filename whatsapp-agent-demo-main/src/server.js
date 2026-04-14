@@ -43,7 +43,10 @@ app.post("/twilio/whatsapp", async (req, res) => {
 		if (isFirstMessage) {
 			await sendWelcome({ to: from });
 			// Mark session as started so we don't re-send welcome
-			session.history = [{ role: "user", content: body }];
+			session.history = [
+				{ role: "user", content: body },
+				{ role: "assistant", content: "Welcome to Otega Restaurant! Reply 1 for Menu, 2 to Reserve, 3 for Delivery." }
+			];
 			await setSession(from, session);
 			return res.status(200).send("ok");
 		}
