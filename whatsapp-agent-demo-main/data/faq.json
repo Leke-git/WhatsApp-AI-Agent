@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "entries": [
     {
       "id": "hours",
@@ -9,66 +9,202 @@
         "when are you open",
         "close|closing",
         "what time.*open",
-        "what time.*close"
+        "what time.*close",
+        "24.?7",
+        "always open"
       ],
-      "answer": "Hours:\nMon–Fri: ${BIZ_HOURS_MON_FRI}\nSat: ${BIZ_HOURS_SAT}\nSun: ${BIZ_HOURS_SUN}\n(Local time: ${RESTAURANT_TIMEZONE})"
+      "answer": "🕐 Otega Restaurant is open *24 hours a day, 7 days a week* — including public holidays!\n\nWe never close, so you can always count on us for a hot meal. 🍽️"
     },
     {
-      "id": "location",
+      "id": "location_wuse",
       "patterns": [
-        "address",
-        "location",
-        "where are you",
-        "how do i get there",
-        "parking"
+        "wuse",
+        "aminu kano",
+        "glovis",
+        "main branch",
+        "wuse 2"
       ],
-      "answer": "${RESTAURANT_NAME} is located at:\n${RESTAURANT_ADDRESS}\nParking: Street and nearby garages (availability varies)."
+      "answer": "📍 *Otega Wuse 2 (Main Branch)*\nGlovis Mall, 176 Aminu Kano Crescent, beside H-Medix, Wuse 2, Abuja.\n\n📞 07039427479 | 09055000161\n\nParking is available in front of the mall (arrive early — it fills up fast)."
     },
     {
-      "id": "menu_dietary",
+      "id": "location_kubwa",
+      "patterns": [
+        "kubwa",
+        "gado nasko",
+        "access bank kubwa"
+      ],
+      "answer": "📍 *Otega Kubwa Branch*\nGado Nasko Road, beside Access Bank, Phase 4, Kubwa, Abuja.\n\n📞 07039427479 | 09055000161\n\nOpen 24/7."
+    },
+    {
+      "id": "location_lugbe",
+      "patterns": [
+        "lugbe",
+        "novare",
+        "airport road",
+        "gateway mall"
+      ],
+      "answer": "📍 *Otega Lugbe Branch*\nNovare Gateway Mall, Airport Road, Lugbe, Abuja.\n\n📞 07039427479 | 09055000161\n\nOpen 24/7."
+    },
+    {
+      "id": "location_all",
+      "patterns": [
+        "location",
+        "address",
+        "where are you",
+        "branches",
+        "how do i get there",
+        "find you",
+        "directions"
+      ],
+      "answer": "📍 *Otega Restaurant — 3 Locations in Abuja*\n\n1️⃣ *Wuse 2 (Main):* Glovis Mall, 176 Aminu Kano Crescent, beside H-Medix\n2️⃣ *Kubwa:* Gado Nasko Road, beside Access Bank, Phase 4\n3️⃣ *Lugbe:* Novare Gateway Mall, Airport Road\n\nAll branches are open *24/7*. Which one is closest to you?"
+    },
+    {
+      "id": "menu_overview",
       "patterns": [
         "menu",
-        "vegetarian|vegan",
-        "gluten(-| )?free",
-        "allerg(y|ies)",
-        "nut free",
-        "dairy free"
+        "what do you serve",
+        "what food",
+        "what can i eat",
+        "what.*available",
+        "food options",
+        "dishes"
       ],
-      "answer": "Menu & dietary notes:\nWe have vegetarian options, and we can flag common allergens.\nFor severe allergies, tell me what to avoid and we’ll confirm with the kitchen."
+      "answer": "🍽️ *Otega Menu Highlights*\n\n*Rice Dishes*\nAsun Fried Rice — ₦2,000–2,500\nNative Rice — ₦1,500\nTega Special Rice — ₦2,000\nGizzard & Plantain Rice — ₦2,000\nWhite Rice in Leaves — ₦800\nChicken Rice — ₦2,500\nJollof Spaghetti — ₦2,000\n\n*Soups & Swallows*\nEgusi Soup — ₦1,500\nOgbono Soup — ₦1,500\nBanga Soup — ₦1,000 (with fish ₦5,000)\nEwedu/Gbegiri — ₦1,500\nPounded Yam — ₦800\nAmala — ₦500\nStarch — ₦500\n\n*Proteins*\nGoat Meat — ₦1,500\nAssorted — ₦2,000\nTitus Fish — ₦1,500–2,000\nCroaker Fish — ₦3,500\nChicken — ₦2,500\nChicken Breast — ₦3,000\nTurkey XL — ₦5,000\nBeef — ₦1,000\n\n*Drinks*\nFresh Melon Juice — ₦3,000\n\nMost meals are under ₦5,000. We use fresh, locally-sourced ingredients. 🌿"
     },
     {
-      "id": "takeout_delivery",
+      "id": "asun_rice",
       "patterns": [
-        "takeout",
-        "pickup",
-        "to go",
-        "delivery",
-        "doordash|uber eats|grubhub"
+        "asun",
+        "asun rice",
+        "asun fried rice"
       ],
-      "answer": "Takeout: Yes.\nDelivery: Available via third-party services (varies).\nTell me what you want and I can help prep a pickup time (demo)."
+      "answer": "🔥 *Asun Fried Rice* is our most popular dish! Smoky spiced goat meat tossed through fragrant fried rice.\n\nPrice: ₦2,000–2,500\n\nOur customers say it's a must-try. It's best enjoyed spicy — just let us know your heat preference when ordering!"
     },
     {
-      "id": "reservations",
+      "id": "pricing",
       "patterns": [
-        "reservation",
-        "reserve",
-        "book a table",
-        "table for \\d+",
-        "party of \\d+"
+        "price",
+        "how much",
+        "cost",
+        "affordable",
+        "cheap",
+        "expensive",
+        "budget"
       ],
-      "answer": "I can help with reservations. Tell me party size, date, and time — or just say “reservation” to start."
+      "answer": "💰 *Otega is famous for affordable fine dining!*\n\nMost meals start from ₦500–₦1,500 and a full meal with protein and drink is typically *under ₦5,000*.\n\nNo hidden charges — what you see on the menu is what you pay. 👌"
+    },
+    {
+      "id": "delivery",
+      "patterns": [
+        "deliver(y|ies)",
+        "order online",
+        "chowdeck",
+        "glovo",
+        "bring food",
+        "order.*home",
+        "home delivery"
+      ],
+      "answer": "🛵 *Otega delivery is available 24/7!*\n\nOrder through:\n• *Chowdeck:* chowdeck.com (search Otega Restaurant)\n• *Glovo:* glovoapp.com (search Otega)\n\nYou can also call us directly:\n📞 07039427479 | 09055000161\n\nWhich branch do you want to order from?"
+    },
+    {
+      "id": "booking_phone",
+      "patterns": [
+        "phone number",
+        "contact",
+        "call",
+        "telephone",
+        "number to call"
+      ],
+      "answer": "📞 *Otega Restaurant Contact*\n\n07039427479\n09055000161\n\nBoth lines are active *24/7* for bookings, reservations, and delivery enquiries."
+    },
+    {
+      "id": "parking",
+      "patterns": [
+        "parking",
+        "park",
+        "car",
+        "drive"
+      ],
+      "answer": "🚗 *Parking at Otega*\n\n• *Wuse 2:* Parking in front of Glovis Mall — arrives early, it fills up fast.\n• *Kubwa:* Street parking available on Gado Nasko Road.\n• *Lugbe:* Parking available at Novare Gateway Mall.\n\nIf you can't find a spot, nearby street parking is usually available."
+    },
+    {
+      "id": "ambience",
+      "patterns": [
+        "ambience",
+        "vibe",
+        "atmosphere",
+        "decor",
+        "instagram",
+        "photo",
+        "aesthetic",
+        "beautiful",
+        "nice place"
+      ],
+      "answer": "✨ *Otega's vibe is modern, warm, and Instagrammable!*\n\nWe designed our space to feel like fine dining without the fine-dining price tag. There's a beautiful photo spot at the back that our customers love.\n\nPro tip: Come early on weekends to beat the crowd and get the best angles! 📸"
+    },
+    {
+      "id": "date_night",
+      "patterns": [
+        "date",
+        "date night",
+        "romantic",
+        "anniversary",
+        "couple"
+      ],
+      "answer": "💕 *Otega is great for casual dates!*\n\nThe ambience is modern and aesthetically pleasing — perfect for a relaxed dinner with someone special.\n\nFor a more private experience, we recommend coming after 8pm on weekdays when it's less busy.\n\nWould you like to make a reservation? 🍽️"
+    },
+    {
+      "id": "group_events",
+      "patterns": [
+        "group",
+        "event",
+        "party",
+        "birthday",
+        "large.*party",
+        "corporate",
+        "office",
+        "team"
+      ],
+      "answer": "🎉 *Otega welcomes groups and events!*\n\nWe regularly host birthday celebrations, office hangouts, and group dinners.\n\nFor large groups (10+), we recommend calling ahead so we can prepare:\n📞 07039427479 | 09055000161\n\nOr I can help you make a reservation right now — just say *reserve*!"
+    },
+    {
+      "id": "dietary",
+      "patterns": [
+        "vegetarian",
+        "vegan",
+        "allerg",
+        "gluten",
+        "dairy",
+        "halal",
+        "diet"
+      ],
+      "answer": "🥗 *Dietary Information*\n\nWe serve a wide range of Nigerian dishes with fresh, local ingredients.\n\n• Most soups and swallows are naturally gluten-friendly\n• Vegetarian options are available (soups without meat, rice dishes)\n• For severe allergies, please call us directly so the kitchen can assist:\n📞 07039427479"
+    },
+    {
+      "id": "reservation_info",
+      "patterns": [
+        "reserv",
+        "book.*table",
+        "table for",
+        "party of",
+        "book a spot"
+      ],
+      "answer": "🍽️ I can help you reserve a table at Otega! We have 3 branches — Wuse 2, Kubwa, and Lugbe.\n\nJust say *reserve* and I'll walk you through it, or call us directly:\n📞 07039427479 | 09055000161"
     },
     {
       "id": "human",
       "patterns": [
         "human",
         "person",
-        "representative",
+        "staff",
         "manager",
         "speak to someone",
-        "talk to someone"
+        "talk to someone",
+        "real person",
+        "customer service",
+        "complaint"
       ],
-      "answer": "No problem — I can loop in a human. Tell me what’s going on and I’ll pass it along."
+      "answer": "👤 No problem — I'll connect you with our team right away. Tell me briefly what you need help with and which branch this is about."
     }
   ]
 }

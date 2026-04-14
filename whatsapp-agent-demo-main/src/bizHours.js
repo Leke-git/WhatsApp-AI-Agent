@@ -1,43 +1,31 @@
-function parseRange(range) {
-	// "11:00-21:00" -> { startMin, endMin }
-	const [start, end] = range.split("-");
-	const toMin = (hhmm) => {
-		const [h, m] = hhmm.split(":").map(Number);
-		return h * 60 + m;
-	};
-	return { startMin: toMin(start), endMin: toMin(end) };
-}
-
-function getLocalParts(timeZone) {
-	const fmt = new Intl.DateTimeFormat("en-US", {
-		timeZone,
-		weekday: "short",
-		hour: "2-digit",
-		minute: "2-digit",
-		hour12: false
-	});
-
-	const parts = fmt.formatToParts(new Date());
-	const map = Object.fromEntries(parts.map((p) => [p.type, p.value]));
-
-	return {
-		weekday: map.weekday, // Mon Tue Wed Thu Fri Sat Sun
-		minutes: Number(map.hour) * 60 + Number(map.minute)
-	};
-}
+// Otega Restaurant is open 24/7.
+// This module is kept for compatibility and future use if hours change per branch.
 
 export function isWithinBusinessHours() {
-	const tz = process.env.RESTAURANT_TIMEZONE || "America/Chicago";
-	const { weekday, minutes } = getLocalParts(tz);
+	const tz = process.env.RESTAURANT_TIMEZONE || "Africa/Lagos";
+	const hours = process.env.BIZ_HOURS || "24/7";
 
-	const monFri = process.env.BIZ_HOURS_MON_FRI || "11:00-21:00";
-	const sat = process.env.BIZ_HOURS_SAT || "12:00-22:00";
-	const sun = process.env.BIZ_HOURS_SUN || "12:00-20:00";
+	if (hours === "24/7") return true;
 
-	let rangeStr = monFri;
-	if (weekday === "Sat") rangeStr = sat;
-	if (weekday === "Sun") rangeStr = sun;
+	// Fallback: parse HH:mm-HH:mm range if ever set
+	try {
+		const fmt = new Intl.DateTimeFormat("en-US", {
+			timeZone: tz,
+			hour: "2-digit",
+			minute: "2-digit",
+			hour12: false
+		});
+		const parts = fmt.formatToParts(new Date());
+		const map = Object.fromEntries(parts.map((p) => [p.type, p.value]));
+		const minutes = Number(map.hour) * 60 + Number(map.minute);
 
-	const { startMin, endMin } = parseRange(rangeStr);
-	return minutes >= startMin && minutes < endMin;
+		const [start, end] = hours.split("-");
+		const toMin = (hhmm) => {
+			const [h, m] = hhmm.split(":").map(Number);
+			return h * 60 + m;
+		};
+		return minutes >= toMin(start) && minutes < toMin(end);
+	} catch {
+		return true;
+	}
 }
