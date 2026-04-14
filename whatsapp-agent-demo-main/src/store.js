@@ -18,7 +18,9 @@ export async function getSession(userId) {
 		.eq("phone", userId)
 		.single();
 
-	return data?.data ?? { history: [], flow: null, reservationDraft: {}, branch: null };
+	const raw = data?.data;
+	const parsed = typeof raw === "string" ? JSON.parse(raw) : raw;
+	return parsed ?? { history: [], flow: null, reservationDraft: {}, branch: null };l };
 }
 
 export async function setSession(userId, session) {
