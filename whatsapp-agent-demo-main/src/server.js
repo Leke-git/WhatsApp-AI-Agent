@@ -1,7 +1,6 @@
 import "dotenv/config";
 import express from "express";
 import morgan from "morgan";
-
 import { validateTwilioWebhook, sendWhatsAppMessage } from "./twilio.js";
 import { hasProcessed, markProcessed, getSession, setSession } from "./store.js";
 import { runAgent, sendWelcome } from "./agent.js";
@@ -37,19 +36,18 @@ app.post("/twilio/whatsapp", async (req, res) => {
 		}
 
 		const session = await getSession(from);
-		
+
 		// Reset session with keyword
 		if (body.toLowerCase() === "restart") {
-    		await setSession(from, { history: [], flow: null, reservationDraft: {}, branch: null });
-    		await sendWelcome({ to: from });
-    		return res.status(200).send("ok");
+			await setSession(from, { history: [], flow: null, reservationDraft: {}, branch: null });
+			await sendWelcome({ to: from });
+			return res.status(200).send("ok");
 		}
-		
+
 		// First-time user — send welcome with buttons
 		const isFirstMessage = session.history.length === 0 && !session.flow;
 		if (isFirstMessage) {
 			await sendWelcome({ to: from });
-			// Mark session as started so we don't re-send welcome
 			session.history = [
 				{ role: "user", content: body },
 				{ role: "assistant", content: "Welcome to Otega Restaurant! Reply 1 for Menu, 2 to Reserve, 3 for Delivery." }
@@ -59,7 +57,6 @@ app.post("/twilio/whatsapp", async (req, res) => {
 		}
 
 		const { reply, newSession } = await runAgent({ from, userText: body, session });
-
 		await setSession(from, newSession);
 		await sendWhatsAppMessage({ to: from, body: reply });
 
