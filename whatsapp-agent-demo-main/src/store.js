@@ -20,7 +20,7 @@ export async function getSession(userId) {
 
 	const raw = data?.data;
 	const parsed = typeof raw === "string" ? JSON.parse(raw) : raw;
-	return parsed ?? { history: [], flow: null, reservationDraft: {}, branch: null };l };
+	return parsed ?? { history: [], flow: null, reservationDraft: {}, branch: null };
 }
 
 export async function setSession(userId, session) {
