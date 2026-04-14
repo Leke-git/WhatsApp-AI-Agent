@@ -26,7 +26,7 @@ export async function getSession(userId) {
 export async function setSession(userId, session) {
 	const sb = getSupabase();
 	await sb.from("sessions").upsert(
-		{ phone: userId, data: session, updated_at: new Date().toISOString() },
+		{ phone: userId, data: JSON.parse(JSON.stringify(session)), updated_at: new Date().toISOString() },
 		{ onConflict: "phone" }
 	);
 }
