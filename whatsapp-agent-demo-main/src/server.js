@@ -37,7 +37,14 @@ app.post("/twilio/whatsapp", async (req, res) => {
 		}
 
 		const session = await getSession(from);
-
+		
+		// Reset session with keyword
+		if (body.toLowerCase() === "restart") {
+    		await setSession(from, { history: [], flow: null, reservationDraft: {}, branch: null });
+    		await sendWelcome({ to: from });
+    		return res.status(200).send("ok");
+}
+		
 		// First-time user — send welcome with buttons
 		const isFirstMessage = session.history.length === 0 && !session.flow;
 		if (isFirstMessage) {
